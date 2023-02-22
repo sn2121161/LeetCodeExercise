@@ -6,8 +6,6 @@ jupyter: python3
 
 ## 两数之和
 
-给定一个数组和一个target，找到符合加起来等于target的两个元素
-
 1. 单指针的解法
 
 在这里for循环里是一次，然后in操作又有一次遍历列表的过程，还要确定两者的index不相等，表示不是同一个数
@@ -17,6 +15,7 @@ jupyter: python3
 nums = [2,3,4,5]
 target = 8
 
+# output: [3, 5]
 
 def TwoSums(list: nums, int: target):
   for i in range(len(nums)):
