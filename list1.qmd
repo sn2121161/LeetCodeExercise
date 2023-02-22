@@ -6,7 +6,7 @@ jupyter: python3
 
 ## 两数之和
 
-1. 单指针的解法
+1.  单指针的解法
 
 在这里for循环里是一次，然后in操作又有一次遍历列表的过程，还要确定两者的index不相等，表示不是同一个数
 
@@ -28,15 +28,15 @@ def TwoSums(list: nums, int: target):
 print(TwoSums(nums, target))
 ```
 
-2. 字典的解法
+2.  字典的解法
 
-* 构造一个di，结构是{value1: index1, value2: index2} 
+-   构造一个di，结构是{value1: index1, value2: index2}
 
-* 用enumerate(nums)的k和v找target - v的值 
+-   用enumerate(nums)的k和v找target - v的值
 
-* 如果di.get()找到了值则返回 
+-   如果di.get()找到了值则返回
 
-* 如果找不到，则在字典中加入新的键值对
+-   如果找不到，则在字典中加入新的键值对
 
 ```{python}
 nums = [2,3,4,5]
@@ -55,21 +55,22 @@ def TwoSums2(list: nums, int: target):
 print(TwoSums2(nums, target))
 ```
 
-3. 双指针的解法 双指针的初始化结构是
+3.  双指针的解法 双指针的初始化结构是
 
+```{=html}
+<!-- -->
 ```
-# 伪代码
-left = 0 
-right = len(nums)-1 
-while left right: 
-  .... 
-  if (condition):
-    return
-  elif (condition):
-    left += 1 
-  else:
-    right -= 1
-```
+    # 伪代码
+    left = 0 
+    right = len(nums)-1 
+    while left right: 
+      .... 
+      if (condition):
+        return
+      elif (condition):
+        left += 1 
+      else:
+        right -= 1
 
 ```{python}
 nums = [2,3,4,5]
@@ -97,10 +98,9 @@ print(TwoSums3(nums, target))
 
 ## 二分查找
 
-1. 双指针
+1.  双指针
 
 ![指针示意图](docs/docs/binary.png)
-
 
 ```{python}
 # input
@@ -126,15 +126,14 @@ def BinarySearch(list: nums, int: target):
 print(BinarySearch(nums, target))
 ```
 
+## 找列表中最小的正整数
 
-## 3. 找列表中最小的正整数
-
-1. 创建新列表记录所有的正整数
+1.  创建新列表记录所有的正整数
 
 空间复杂度高
 
-2. 排序，数出负数和0出现到第几个index
-排序以后记录下0出现到了第几个位置，count，然后返回count的那个下标是最小值
+2.  排序，数出负数和0出现到第几个index 排序以后记录下0出现到了第几个位置，count，然后返回count的那个下标是最小值
+
 ```{python}
 # input
 nums = [2,3,-1,-11,-323,1,5,32]
@@ -153,6 +152,7 @@ print(MinPositive(nums))
 ```
 
 小问题：不排序能实现max和min吗？ 可以
+
 ```{python}
 # input
 nums = [2,3,-1,-11,-323,1,5,32,33]
@@ -172,7 +172,7 @@ print(Max(nums))
 
 ## 三数之和
 
-1. 双指针
+1.  双指针
 
 ```{python}
 
@@ -187,10 +187,3 @@ print(Max(nums))
 
 
 ```
-
-
-
-
-
-
-

@@ -11,7 +11,7 @@
     "href": "list1.html#两数之和",
     "title": "1  数组1(list)",
     "section": "1.1 两数之和",
-    "text": "1.1 两数之和\n给定一个数组和一个target，找到符合加起来等于target的两个元素\n\n单指针的解法\n\n在这里for循环里是一次，然后in操作又有一次遍历列表的过程，还要确定两者的index不相等，表示不是同一个数\n\n# input\nnums = [2,3,4,5]\ntarget = 8\n\n\ndef TwoSums(list: nums, int: target):\n  for i in range(len(nums)):\n    j = target -nums[i]\n    if j in nums and i != nums.index(j):\n      return [nums[i], j]\n  return -1\n\n\nprint(TwoSums(nums, target))\n\n[3, 5]\n\n\n\n字典的解法\n\n构造一个di，结构是{value1: index1, value2: index2} 用enumerate(nums)的k和v找target - v的值 如果di.get()找到了值则返回 如果找不到，则在字典中加入新的键值对\n\nnums = [2,3,4,5]\ntarget = 6\n\n\ndef TwoSums2(list: nums, int: target):\n  di = {}\n  for k, v in enumerate(nums):\n    if di.get(target - v) is not None:\n      return [target - v, v]\n    di[v] = k\n  return -1\n\n\nprint(TwoSums2(nums, target))\n\n[2, 4]\n\n\n\n双指针的解法 双指针的初始化结构是\n\nleft = 0 right = len(nums)-1 while left right: …. if (condition): return elif (condition): left += 1 else: right -= 1\n\nnums = [2,3,4,5]\ntarget = 5\n\n\ndef TwoSums3(list:nums, int:target):\n  left = 0\n  right = len(nums)-1\n  while left <= right:\n    if nums[left] + nums[right] == target:\n      return [nums[left], nums[right]]\n    elif nums[left] + nums[right] < target:\n      left += 1\n    else:\n      right -= 1\n  return -1\n\n\nprint(TwoSums3(nums, target))\n\n[2, 3]"
+    "text": "1.1 两数之和\n\n单指针的解法\n\n在这里for循环里是一次，然后in操作又有一次遍历列表的过程，还要确定两者的index不相等，表示不是同一个数\n\n# input\nnums = [2,3,4,5]\ntarget = 8\n\n# output: [3, 5]\n\ndef TwoSums(list: nums, int: target):\n  for i in range(len(nums)):\n    j = target -nums[i]\n    if j in nums and i != nums.index(j):\n      return [nums[i], j]\n  return -1\n\n\nprint(TwoSums(nums, target))\n\n[3, 5]\n\n\n\n字典的解法\n\n\n构造一个di，结构是{value1: index1, value2: index2}\n用enumerate(nums)的k和v找target - v的值\n如果di.get()找到了值则返回\n如果找不到，则在字典中加入新的键值对\n\n\nnums = [2,3,4,5]\ntarget = 6\n\n\ndef TwoSums2(list: nums, int: target):\n  di = {}\n  for k, v in enumerate(nums):\n    if di.get(target - v) is not None:\n      return [target - v, v]\n    di[v] = k\n  return -1\n\n\nprint(TwoSums2(nums, target))\n\n[2, 4]\n\n\n\n双指针的解法 双指针的初始化结构是\n\n\n# 伪代码\nleft = 0 \nright = len(nums)-1 \nwhile left right: \n  .... \n  if (condition):\n    return\n  elif (condition):\n    left += 1 \n  else:\n    right -= 1\n\nnums = [2,3,4,5]\ntarget = 5\n\n\ndef TwoSums3(list:nums, int:target):\n  # 那么先要给数组排序\n  nums.sort()\n  left = 0\n  right = len(nums)-1\n  while left <= right:\n    if nums[left] + nums[right] == target:\n      return [nums[left], nums[right]]\n    elif nums[left] + nums[right] < target:\n      left += 1\n    else:\n      right -= 1\n  return -1\n\n\nprint(TwoSums3(nums, target))\n\n[2, 3]"
   },
   {
     "objectID": "summary.html",
@@ -25,6 +25,20 @@
     "href": "list1.html#二分查找",
     "title": "1  数组1(list)",
     "section": "1.2 二分查找",
-    "text": "1.2 二分查找\n\n双指针解法\n\n\n\n# input\nnums = [1,3,5,7,9]\ntarget = 9\n\n# output：返回元素所在的index\n\ndef BinarySearch(list: nums, int: target):\n  left = 0\n  right = len(nums) - 1\n  while left <= right:\n    mid = (left+right)//2  # 取整数\n    if target == nums[mid]:\n      return mid\n    elif target > nums[mid]:  # 在右边\n      left += 1\n    else:\n      right -= 1\n  return -1   # 找不到返回-1\n\n\nprint(BinarySearch(nums, target))\n\n4"
+    "text": "1.2 二分查找\n\n双指针\n\n\n\n\n指针示意图\n\n\n\n# input\nnums = [1,3,5,7,9]\ntarget = 9\n\n# output：返回元素所在的index\n\ndef BinarySearch(list: nums, int: target):\n  left = 0\n  right = len(nums) - 1\n  while left <= right:\n    mid = (left+right)//2  # 取整数\n    if target == nums[mid]:\n      return mid\n    elif target > nums[mid]:  # 在右边\n      left += 1\n    else:\n      right -= 1\n  return -1   # 找不到返回-1\n\n\nprint(BinarySearch(nums, target))\n\n4"
+  },
+  {
+    "objectID": "list1.html#找列表中最小的正整数",
+    "href": "list1.html#找列表中最小的正整数",
+    "title": "1  数组1(list)",
+    "section": "1.3 找列表中最小的正整数",
+    "text": "1.3 找列表中最小的正整数\n\n创建新列表记录所有的正整数\n\n空间复杂度高\n\n排序，数出负数和0出现到第几个index 排序以后记录下0出现到了第几个位置，count，然后返回count的那个下标是最小值\n\n\n# input\nnums = [2,3,-1,-11,-323,1,5,32]\n\n# output: 1\n\ndef MinPositive(list:nums):\n  count = 0\n  nums.sort()\n  for i in range(len(nums)):\n    if nums[i] <= 0:\n      count += 1\n  return nums[count]\n  \nprint(MinPositive(nums))\n\n1\n\n\n小问题：不排序能实现max和min吗？ 可以\n\n# input\nnums = [2,3,-1,-11,-323,1,5,32,33]\n\n# output: 32\n\n\ndef Max(list:nums):\n  temp = 0\n  for i in range(1, len(nums)):\n    if nums[i] >= nums[temp]:\n      temp = i\n  return nums[temp]\n\nprint(Max(nums))\n\n33"
+  },
+  {
+    "objectID": "list1.html#三数之和",
+    "href": "list1.html#三数之和",
+    "title": "1  数组1(list)",
+    "section": "1.4 三数之和",
+    "text": "1.4 三数之和\n\n双指针"
   }
 ]
