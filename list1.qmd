@@ -1,0 +1,125 @@
+---
+jupyter: python3
+---
+
+# 数组1(list)
+
+## 两数之和
+
+给定一个数组和一个target，找到符合加起来等于target的两个元素
+
+1. 单指针的解法
+
+在这里for循环里是一次，然后in操作又有一次遍历列表的过程，还要确定两者的index不相等，表示不是同一个数
+
+```{python}
+# input
+nums = [2,3,4,5]
+target = 8
+
+
+def TwoSums(list: nums, int: target):
+  for i in range(len(nums)):
+    j = target -nums[i]
+    if j in nums and i != nums.index(j):
+      return [nums[i], j]
+  return -1
+
+
+print(TwoSums(nums, target))
+```
+
+2. 字典的解法
+
+* 构造一个di，结构是{value1: index1, value2: index2} * 用enumerate(nums)的k和v找target - v的值 
+* 如果di.get()找到了值则返回 
+* 如果找不到，则在字典中加入新的键值对
+
+```{python}
+nums = [2,3,4,5]
+target = 6
+
+
+def TwoSums2(list: nums, int: target):
+  di = {}
+  for k, v in enumerate(nums):
+    if di.get(target - v) is not None:
+      return [target - v, v]
+    di[v] = k
+  return -1
+
+
+print(TwoSums2(nums, target))
+```
+
+3. 双指针的解法 双指针的初始化结构是
+```
+# 伪代码
+left = 0 
+right = len(nums)-1 
+while left right: 
+  .... 
+  if (condition):
+    return
+  elif (condition):
+    left += 1 
+  else:
+    right -= 1
+```
+
+```{python}
+nums = [2,3,4,5]
+target = 5
+
+
+def TwoSums3(list:nums, int:target):
+  # 那么先要给数组排序
+  nums.sort()
+  left = 0
+  right = len(nums)-1
+  while left <= right:
+    if nums[left] + nums[right] == target:
+      return [nums[left], nums[right]]
+    elif nums[left] + nums[right] < target:
+      left += 1
+    else:
+      right -= 1
+  return -1
+
+
+print(TwoSums3(nums, target))
+
+```
+
+## 二分查找
+
+1. 双指针
+
+![指针示意图](docs/docs/binary.png)
+
+
+```{python}
+# input
+nums = [1,3,5,7,9]
+target = 9
+
+# output：返回元素所在的index
+
+def BinarySearch(list: nums, int: target):
+  left = 0
+  right = len(nums) - 1
+  while left <= right:
+    mid = (left+right)//2  # 取整数
+    if target == nums[mid]:
+      return mid
+    elif target > nums[mid]:  # 在右边
+      left += 1
+    else:
+      right -= 1
+  return -1   # 找不到返回-1
+
+
+print(BinarySearch(nums, target))
+```
+
+

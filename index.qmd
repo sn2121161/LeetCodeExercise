@@ -1,0 +1,14 @@
+---
+jupyter: python3
+---
+
+# Self Blog {.unnumbered}
+
+This is a Quarto book to record the mind, methodology, solving code about exercises in LeetCode. put it into Github.
+
+Keep going, always on the way
+
+
+```{python}
+print("keep going and always on the way")
+```
