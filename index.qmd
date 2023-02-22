@@ -8,7 +8,6 @@ This is a Quarto book to record the mind, methodology, solving code about exerci
 
 Keep going, always on the way
 
-
 ```{python}
 print("keep going and always on the way")
 ```
