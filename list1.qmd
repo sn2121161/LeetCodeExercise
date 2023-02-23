@@ -173,17 +173,235 @@ print(Max(nums))
 ## 三数之和
 
 1.  双指针
+* 要求就是搞一个列表容纳所有的解
+* 你需要一个遍历去让每个元素，这个元素是第一个指针
+* 然后设置left和right的开始，left从第i+1个开始，right从最右边的开始
+* 判断相等和大于小于的时候指针怎么走
+* 怎么消除重复的影响（因为有些值是重复的）
+--需要对每个指针各自前后的值进行比较
+--指针a的判断，nums[a] == nums[a-1]: 跳过
+--指针b的判断，nums[left-1] == nums[left]: left += 1，否则还是继续考虑当前位置
+--指针c的判断，nums[right+1] == nums[right]: right -= 1
+
+![图1](docs/docs/2.png)
+
+
+![图2](docs/docs/3.png)
+
+```{python}
+# input
+nums = [-1,0,1,2,-1,-4]
+target = 0
+
+# output
+
+def ThreeSums(list: nums, int: target):
+  res = []  # 解的容器
+  nums.sort()  # 先对数组进行排序
+  
+  for i in range(len(nums)-1):   # 指针a
+    left = i+1  # 指针b
+    right = len(nums)-1  # 指针c
+    if nums[i] == nums[i-1]:  #这是指针a自己的判断，判断前一个后一个是否相等
+      continue  # 跳过相同值得指针得计算
+    while left < right:
+      sums = nums[i] + nums[left] + nums[right]
+      if sums == target and nums[right] != nums[left]:
+        res.append( [nums[i], nums[left], nums[right]] )  # 符合的加入解集
+        left += 1 # 接着往后计算
+        # 其实去掉也行嘛
+        
+        # if nums[left] == nums[left - 1]: # 指针b得前后值相同
+          # left += 1
+        # right -= 1  # else
+        # if nums[right] == nums[right + 1]:
+          # right -= 1
+      elif sums < target:
+        left += 1
+      else:
+        right -= 1
+        
+  return res
+  
+print(ThreeSums(nums, target))
+```
+
+### 解析：假如本例中的5,5,10
+pointer a = 5
+pointer b = 5
+pointer c = 10
+他符合等于target的条件，加入res
+left += 1
+pointer a = 5
+pointer b = 6
+pointer c = 9 (left != left-1，所以走right-=1的路，再判断此时的right+1和当前right是否相等，发现不等，则无需再让right-=1)
+判断5,6,9依然符合条件
+left += 1， left=9，right <9,循环结束
+
+
+
+### 另外一个问题：消除二维数组的重复问题
+```{python}
+
+# input
+nums = [[1,2,3], [4,5,6], [4,5,6], [1,2,3]]
+
+# output: [[1,2,3], [4,5,6]]
+
+def eliminate(list: nums) -> list:
+  di = {}
+  for i, v in enumerate(nums):
+    di[str(v)] = i
+  return di.keys()
+  
+print(eliminate(nums))
+```
+
+## 数组实现哈希表
+一个哈希表的功能有
+key: value是哈希表的基本单位
+* 增加元素
+* 删除元素
+* 查找元素，找不到返回-1
+
+本题巧妙处就是构造了一个全是-1的hashmap，注意长度不要溢出即可
+```{python}
+
+class Hashmap():
+  def __init__(self):
+    self.hashmap = [-1 for _ in range(10**3)]  # 构造一个全是-1的元素表
+  
+  def add(self, key, value):
+    self.hashmap[key] = value
+  
+  def get(self, key):
+    return self.hashmap[key]
+    
+  def remove(self, key):
+    self.hashmap[key] = -1
+
+h = Hashmap()
+h.add(1, 2)
+h.add(10, 4)
+print(h.get(10))
+print(h.get(1))
+print(h.get(5))
+h.remove(1)
+print(h.get(1))
+    
+```
+
+
+
+## 数组的合并
+
+
+```{python}
+# input 
+nums = [[1,2,3], [2,5,8], [7,12,13]]
+
+# output: [[1,8], [10,12,13]]
+
+def CombineSame(nums):
+  res = []
+  left = nums[0][0]
+  right = nums[0][-1]
+  counter = 0
+  while counter <= len(nums)-2:
+    if nums[counter][-1] >= nums[counter+1][0]:
+      right = nums[counter+1][-1]
+      nums[counter] = [left, right]
+    
+      
+    
+    counter += 1
+  res.append(nums[counter])
+  return res
+
+print(CombineSame(nums))
+```
+
+## 删除数组的元素（27）
+
+1. 两层for循环
+删除元素的操作时间复杂度是O(n)，因为删去了一个元素，还要让其他的元素进行补位，只是在计数器层面上他的长度减少了1，在物理空间储存上任然是原长度
+
+2. 双指针
+定义一个慢指针和一个快指针
+快指针负责寻找哪些元素是要的，当前案例3是不要的，然后再赋值给慢指针，所以慢指针是被赋值的元素
+慢指针也需要动起来
+
+示意图
+![](docs/docs/4.png)
 
 ```{python}
 
-  
-  
-  
+# input
+nums = [1,2,3,4,5]
+target = 3
 
+# output [1,2,4,5,5]
 
+# 两层for循环
+def delete0(nums, target):
+  for i in range(len(nums)):
+    if nums[i] == target:
+      for j in range(0, i):
+        nums[i+j] = nums[j+i+1]
+  return nums, len(nums)
 
-
-
-
-
+# 双指针
+def delete1(nums, target):
+  slow = 0  # 慢指针
+  for i in range(len(nums)):  # 快指针
+    if nums[i] != target:
+      nums[slow] = nums[i]  # 对非目标元素进行一一赋值
+      slow += 1   # 慢指针也需要移动
+  return slow
+print(delete0(nums, target))
+print(delete1(nums, target))
 ```
+
+
+## 有序数组的平方（977）
+O(nlogn):负数的平方需要排个序
+双指针：
+
+```{python}
+
+# input
+nums = [-8, 2, 3, 5, 7]
+
+# output [1,4,9,25,49]
+
+def function1(nums):
+  a = list(map(lambda x:x**2, nums))
+  a.sort()
+  return a
+
+
+def function2(nums):
+  res = [0 for _ in range(len(nums))]   # 生成一个有值的数组
+  left = 0
+  right = k = len(nums)-1
+  while left <= right:
+    if pow(nums[left], 2) > pow(nums[right], 2):
+      res[k] = pow(nums[left], 2)
+      k -= 1
+      left += 1
+      
+    else:
+      res[k] = pow(nums[right], 2)
+      k -= 1
+      right -= 1
+      
+  return res
+
+
+print(function1(nums))
+print(function2(nums))
+```
+
+
+
+

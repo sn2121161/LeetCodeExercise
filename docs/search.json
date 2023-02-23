@@ -39,6 +39,34 @@
     "href": "list1.html#三数之和",
     "title": "1  数组1(list)",
     "section": "1.4 三数之和",
-    "text": "1.4 三数之和\n\n双指针"
+    "text": "1.4 三数之和\n\n双指针\n\n\n要求就是搞一个列表容纳所有的解\n你需要一个遍历去让每个元素，这个元素是第一个指针\n然后设置left和right的开始，left从第i+1个开始，right从最右边的开始\n判断相等和大于小于的时候指针怎么走\n怎么消除重复的影响（因为有些值是重复的） –需要对每个指针各自前后的值进行比较 –指针a的判断，nums[a] == nums[a-1]: 跳过 –指针b的判断，nums[left-1] == nums[left]: left += 1，否则还是继续考虑当前位置 –指针c的判断，nums[right+1] == nums[right]: right -= 1\n\n\n\n\n图1\n\n\n\n\n\n图2\n\n\n\n# input\nnums = [-1,0,1,2,-1,-4]\ntarget = 0\n\n# output\n\ndef ThreeSums(list: nums, int: target):\n  res = []  # 解的容器\n  nums.sort()  # 先对数组进行排序\n  \n  for i in range(len(nums)-1):   # 指针a\n    left = i+1  # 指针b\n    right = len(nums)-1  # 指针c\n    if nums[i] == nums[i-1]:  #这是指针a自己的判断，判断前一个后一个是否相等\n      continue  # 跳过相同值得指针得计算\n    while left < right:\n      sums = nums[i] + nums[left] + nums[right]\n      if sums == target and nums[right] != nums[left]:\n        res.append( [nums[i], nums[left], nums[right]] )  # 符合的加入解集\n        left += 1 # 接着往后计算\n        # 其实去掉也行嘛\n        \n        # if nums[left] == nums[left - 1]: # 指针b得前后值相同\n          # left += 1\n        # right -= 1  # else\n        # if nums[right] == nums[right + 1]:\n          # right -= 1\n      elif sums < target:\n        left += 1\n      else:\n        right -= 1\n        \n  return res\n  \nprint(ThreeSums(nums, target))\n\n[[-1, -1, 2], [-1, 0, 1]]\n\n\n\n1.4.1 解析：假如本例中的5,5,10\npointer a = 5 pointer b = 5 pointer c = 10 他符合等于target的条件，加入res left += 1 pointer a = 5 pointer b = 6 pointer c = 9 (left != left-1，所以走right-=1的路，再判断此时的right+1和当前right是否相等，发现不等，则无需再让right-=1) 判断5,6,9依然符合条件 left += 1， left=9，right <9,循环结束\n\n\n1.4.2 另外一个问题：消除二维数组的重复问题\n\n# input\nnums = [[1,2,3], [4,5,6], [4,5,6], [1,2,3]]\n\n# output: [[1,2,3], [4,5,6]]\n\ndef eliminate(list: nums) -> list:\n  di = {}\n  for i, v in enumerate(nums):\n    di[str(v)] = i\n  return di.keys()\n  \nprint(eliminate(nums))\n\ndict_keys(['[1, 2, 3]', '[4, 5, 6]'])"
+  },
+  {
+    "objectID": "list1.html#数组实现哈希表",
+    "href": "list1.html#数组实现哈希表",
+    "title": "1  数组1(list)",
+    "section": "1.5 数组实现哈希表",
+    "text": "1.5 数组实现哈希表\n一个哈希表的功能有 key: value是哈希表的基本单位 * 增加元素 * 删除元素 * 查找元素，找不到返回-1\n本题巧妙处就是构造了一个全是-1的hashmap，注意长度不要溢出即可\n\nclass Hashmap():\n  def __init__(self):\n    self.hashmap = [-1 for _ in range(10**3)]  # 构造一个全是-1的元素表\n  \n  def add(self, key, value):\n    self.hashmap[key] = value\n  \n  def get(self, key):\n    return self.hashmap[key]\n    \n  def remove(self, key):\n    self.hashmap[key] = -1\n\nh = Hashmap()\nh.add(1, 2)\nh.add(10, 4)\nprint(h.get(10))\nprint(h.get(1))\nprint(h.get(5))\nh.remove(1)\nprint(h.get(1))\n\n4\n2\n-1\n-1"
+  },
+  {
+    "objectID": "list1.html#数组的合并",
+    "href": "list1.html#数组的合并",
+    "title": "1  数组1(list)",
+    "section": "1.6 数组的合并",
+    "text": "1.6 数组的合并\n\n# input \nnums = [[1,2,3], [2,5,8], [7,12,13]]\n\n# output: [[1,8], [10,12,13]]\n\ndef CombineSame(nums):\n  res = []\n  left = nums[0][0]\n  right = nums[0][-1]\n  counter = 0\n  while counter <= len(nums)-2:\n    if nums[counter][-1] >= nums[counter+1][0]:\n      right = nums[counter+1][-1]\n      nums[counter] = [left, right]\n    \n      \n    \n    counter += 1\n  res.append(nums[counter])\n  return res\n\nprint(CombineSame(nums))\n\n[[7, 12, 13]]"
+  },
+  {
+    "objectID": "list1.html#删除数组的元素27",
+    "href": "list1.html#删除数组的元素27",
+    "title": "1  数组1(list)",
+    "section": "1.7 删除数组的元素（27）",
+    "text": "1.7 删除数组的元素（27）\n\n两层for循环 删除元素的操作时间复杂度是O(n)，因为删去了一个元素，还要让其他的元素进行补位，只是在计数器层面上他的长度减少了1，在物理空间储存上任然是原长度\n双指针 定义一个慢指针和一个快指针 快指针负责寻找哪些元素是要的，当前案例3是不要的，然后再赋值给慢指针，所以慢指针是被赋值的元素 慢指针也需要动起来\n\n示意图 \n\n# input\nnums = [1,2,3,4,5]\ntarget = 3\n\n# output [1,2,4,5,5]\n\n# 两层for循环\ndef delete0(nums, target):\n  for i in range(len(nums)):\n    if nums[i] == target:\n      for j in range(0, i):\n        nums[i+j] = nums[j+i+1]\n  return nums, len(nums)\n\n# 双指针\ndef delete1(nums, target):\n  slow = 0  # 慢指针\n  for i in range(len(nums)):  # 快指针\n    if nums[i] != target:\n      nums[slow] = nums[i]  # 对非目标元素进行一一赋值\n      slow += 1   # 慢指针也需要移动\n  return slow\nprint(delete0(nums, target))\nprint(delete1(nums, target))\n\n([1, 2, 4, 5, 5], 5)\n5"
+  },
+  {
+    "objectID": "list1.html#有序数组的平方977",
+    "href": "list1.html#有序数组的平方977",
+    "title": "1  数组1(list)",
+    "section": "1.8 有序数组的平方（977）",
+    "text": "1.8 有序数组的平方（977）\nO(nlogn):负数的平方需要排个序 双指针：\n\n# input\nnums = [-8, 2, 3, 5, 7]\n\n# output [1,4,9,25,49]\n\ndef function1(nums):\n  a = list(map(lambda x:x**2, nums))\n  a.sort()\n  return a\n\n\ndef function2(nums):\n  res = [0 for _ in range(len(nums))]   # 生成一个有值的数组\n  left = 0\n  right = k = len(nums)-1\n  while left <= right:\n    if pow(nums[left], 2) > pow(nums[right], 2):\n      res[k] = pow(nums[left], 2)\n      k -= 1\n      left += 1\n      \n    else:\n      res[k] = pow(nums[right], 2)\n      k -= 1\n      right -= 1\n      \n  return res\n\n\nprint(function1(nums))\nprint(function2(nums))\n\n[4, 9, 25, 49, 64]\n[4, 9, 25, 49, 64]"
   }
 ]
