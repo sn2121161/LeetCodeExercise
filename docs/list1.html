@@ -197,6 +197,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#数组的合并" id="toc-数组的合并" class="nav-link" data-scroll-target="#数组的合并"><span class="toc-section-number">1.6</span>  数组的合并</a></li>
   <li><a href="#删除数组的元素27" id="toc-删除数组的元素27" class="nav-link" data-scroll-target="#删除数组的元素27"><span class="toc-section-number">1.7</span>  删除数组的元素（27）</a></li>
   <li><a href="#有序数组的平方977" id="toc-有序数组的平方977" class="nav-link" data-scroll-target="#有序数组的平方977"><span class="toc-section-number">1.8</span>  有序数组的平方（977）</a></li>
+  <li><a href="#最小长度区间209" id="toc-最小长度区间209" class="nav-link" data-scroll-target="#最小长度区间209"><span class="toc-section-number">1.9</span>  最小长度区间（209）</a></li>
+  <li><a href="#螺旋矩阵59" id="toc-螺旋矩阵59" class="nav-link" data-scroll-target="#螺旋矩阵59"><span class="toc-section-number">1.10</span>  螺旋矩阵（59）</a></li>
   </ul>
 </nav>
     </div>
@@ -408,11 +410,11 @@ while left right:
 <li>双指针</li>
 </ol>
 <ul>
-<li>要求就是搞一个列表容纳所有的解</li>
-<li>你需要一个遍历去让每个元素，这个元素是第一个指针</li>
-<li>然后设置left和right的开始，left从第i+1个开始，right从最右边的开始</li>
-<li>判断相等和大于小于的时候指针怎么走</li>
-<li>怎么消除重复的影响（因为有些值是重复的） –需要对每个指针各自前后的值进行比较 –指针a的判断，nums[a] == nums[a-1]: 跳过 –指针b的判断，nums[left-1] == nums[left]: left += 1，否则还是继续考虑当前位置 –指针c的判断，nums[right+1] == nums[right]: right -= 1</li>
+<li><p>要求就是搞一个列表容纳所有的解</p></li>
+<li><p>你需要一个遍历去让每个元素，这个元素是第一个指针</p></li>
+<li><p>然后设置left和right的开始，left从第i+1个开始，right从最右边的开始</p></li>
+<li><p>判断相等和大于小于的时候指针怎么走</p></li>
+<li><p>怎么消除重复的影响（因为有些值是重复的） –需要对每个指针各自前后的值进行比较 –指针a的判断，nums[a] == nums[a-1]: 跳过 –指针b的判断，nums[left-1] == nums[left]: left += 1，否则还是继续考虑当前位置 –指针c的判断，nums[right+1] == nums[right]: right -= 1</p></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -483,18 +485,26 @@ while left right:
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i, v <span class="kw">in</span> <span class="bu">enumerate</span>(nums):</span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    di[<span class="bu">str</span>(v)] <span class="op">=</span> i</span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> di.keys()</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eliminate(nums))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eliminate2(<span class="bu">list</span>: nums) <span class="op">-&gt;</span> <span class="bu">list</span>:</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  res <span class="op">=</span> []</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(nums)):</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> nums[i] <span class="kw">not</span> <span class="kw">in</span> res:</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>      res.append(nums[i])</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> res</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(eliminate2(nums))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>dict_keys(['[1, 2, 3]', '[4, 5, 6]'])</code></pre>
+<pre><code>[[1, 2, 3], [4, 5, 6]]</code></pre>
 </div>
 </div>
 </section>
 </section>
 <section id="数组实现哈希表" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="数组实现哈希表"><span class="header-section-number">1.5</span> 数组实现哈希表</h2>
-<p>一个哈希表的功能有 key: value是哈希表的基本单位 * 增加元素 * 删除元素 * 查找元素，找不到返回-1</p>
-<p>本题巧妙处就是构造了一个全是-1的hashmap，注意长度不要溢出即可</p>
+<p>一个哈希表的功能有：</p>
+<p>key: value是哈希表的基本单位 * 增加元素 * 删除元素 * 查找元素，找不到返回-1</p>
+<p>本题巧妙处就是构造了一个全是-1的数组，注意长度不要溢出即可</p>
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Hashmap():</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
@@ -529,38 +539,53 @@ while left right:
 <h2 data-number="1.6" class="anchored" data-anchor-id="数组的合并"><span class="header-section-number">1.6</span> 数组的合并</h2>
 <div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># input </span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>nums <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">8</span>], [<span class="dv">7</span>,<span class="dv">12</span>,<span class="dv">13</span>]]</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># output: [[1,8], [10,12,13]]</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> CombineSame(nums):</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  res <span class="op">=</span> []</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  left <span class="op">=</span> nums[<span class="dv">0</span>][<span class="dv">0</span>]</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  right <span class="op">=</span> nums[<span class="dv">0</span>][<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  counter <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> counter <span class="op">&lt;=</span> <span class="bu">len</span>(nums)<span class="op">-</span><span class="dv">2</span>:</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> nums[counter][<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;=</span> nums[counter<span class="op">+</span><span class="dv">1</span>][<span class="dv">0</span>]:</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>      right <span class="op">=</span> nums[counter<span class="op">+</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>      nums[counter] <span class="op">=</span> [left, right]</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>nums <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">8</span>], [<span class="dv">7</span>,<span class="dv">12</span>,<span class="dv">13</span>]]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>nums2 <span class="op">=</span> [[<span class="dv">1</span>,<span class="dv">4</span>],[<span class="dv">0</span>,<span class="dv">0</span>]]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># output: [[1,2,3], [4,13]], [[1,4], [5,6], [7,9]]</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> CombineSame(nums):</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  nums.sort()</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  a <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> a <span class="op">&lt;=</span> <span class="bu">len</span>(nums)<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(nums)<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> nums[i][<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;=</span> nums[i<span class="op">+</span><span class="dv">1</span>][<span class="dv">0</span>]:</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>        nums[i] <span class="op">=</span> nums[i<span class="op">+</span><span class="dv">1</span>] <span class="op">=</span> [nums[i][<span class="dv">0</span>], nums[i<span class="op">+</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]]  <span class="co"># 遍历了每个元素</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>      a <span class="op">+=</span> <span class="dv">1</span></span>
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    counter <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  res.append(nums[counter])</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> res</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(CombineSame(nums))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 数组去重，这个复杂度可能很高，</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 因为not in的操作可能需要O(n)时间，但是题目还是解出来了</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  res <span class="op">=</span> []</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(nums)):</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> nums[i] <span class="kw">not</span> <span class="kw">in</span> res:</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>      res.append(nums[i])</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> res</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="co"># print(CombineSame(nums))</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(CombineSame(nums2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[[7, 12, 13]]</code></pre>
+<pre><code>[[0, 0], [1, 4]]</code></pre>
 </div>
 </div>
 </section>
 <section id="删除数组的元素27" class="level2" data-number="1.7">
 <h2 data-number="1.7" class="anchored" data-anchor-id="删除数组的元素27"><span class="header-section-number">1.7</span> 删除数组的元素（27）</h2>
 <ol type="1">
-<li><p>两层for循环 删除元素的操作时间复杂度是O(n)，因为删去了一个元素，还要让其他的元素进行补位，只是在计数器层面上他的长度减少了1，在物理空间储存上任然是原长度</p></li>
-<li><p>双指针 定义一个慢指针和一个快指针 快指针负责寻找哪些元素是要的，当前案例3是不要的，然后再赋值给慢指针，所以慢指针是被赋值的元素 慢指针也需要动起来</p></li>
+<li>两层for循环</li>
 </ol>
+<p>删除元素的操作时间复杂度是O(n)，因为删去了一个元素，还要让其他的元素进行补位，只是在计数器层面上他的长度减少了1，在物理空间储存上任然是原长度</p>
+<ol start="2" type="1">
+<li>双指针</li>
+</ol>
+<ul>
+<li>定义一个慢指针和一个快指针</li>
+<li>快指针负责寻找哪些元素是要的，当前案例3是不要的，然后再赋值给慢指针，所以慢指针是被赋值的元素</li>
+<li>慢指针也需要往后加一</li>
+</ul>
 <p>示意图 <img src="docs/docs/4.png" class="img-fluid"></p>
 <div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># input</span></span>
@@ -595,7 +620,13 @@ while left right:
 </section>
 <section id="有序数组的平方977" class="level2" data-number="1.8">
 <h2 data-number="1.8" class="anchored" data-anchor-id="有序数组的平方977"><span class="header-section-number">1.8</span> 有序数组的平方（977）</h2>
-<p>O(nlogn):负数的平方需要排个序 双指针：</p>
+<ol type="1">
+<li><p>O(nlogn):负数的平方需要排个序</p></li>
+<li><p>双指针 O(n)：</p></li>
+</ol>
+<p>首先，一个可以使用的思路：先构造一个有初始值的列表，然后从左往右或者从右往左进行赋值</p>
+<p>为什么function3是不对的：</p>
+<p>因为左边和右边代表着两个之间必有一个是全局最大， 最大的在新数组中放在最优的位置， 而你通过两侧的指针不能确定全局最小在哪里，要从中心往外延申 append也不对，因为append是从最小的开始往数组里加</p>
 <div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># input</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>nums <span class="op">=</span> [<span class="op">-</span><span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>]</span>
@@ -609,28 +640,159 @@ while left right:
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> function2(nums):</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  res <span class="op">=</span> [<span class="dv">0</span> <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(nums))]   <span class="co"># 生成一个有值的数组</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  left <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  right <span class="op">=</span> k <span class="op">=</span> <span class="bu">len</span>(nums)<span class="op">-</span><span class="dv">1</span></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> left <span class="op">&lt;=</span> right:</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">pow</span>(nums[left], <span class="dv">2</span>) <span class="op">&gt;</span> <span class="bu">pow</span>(nums[right], <span class="dv">2</span>):</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>      res[k] <span class="op">=</span> <span class="bu">pow</span>(nums[left], <span class="dv">2</span>)</span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>      k <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>      left <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>      res[k] <span class="op">=</span> <span class="bu">pow</span>(nums[right], <span class="dv">2</span>)</span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>      k <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>      right <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> res</span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  res <span class="op">=</span> [<span class="dv">0</span> <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(nums))]   <span class="co"># 生成一个有值的数组，然后从数组的最右侧开始像最左侧赋值</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  left <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  right <span class="op">=</span> k <span class="op">=</span> <span class="bu">len</span>(nums)<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> left <span class="op">&lt;=</span> right:</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">pow</span>(nums[left], <span class="dv">2</span>) <span class="op">&gt;</span> <span class="bu">pow</span>(nums[right], <span class="dv">2</span>):</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>      res[k] <span class="op">=</span> <span class="bu">pow</span>(nums[left], <span class="dv">2</span>)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>      k <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>      left <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>      res[k] <span class="op">=</span> <span class="bu">pow</span>(nums[right], <span class="dv">2</span>)</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>      k <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>      right <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> res</span>
 <span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(function1(nums))</span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(function2(nums))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a><span class="co"># function3是反例，不能这样做</span></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> function3(nums):</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>  res <span class="op">=</span> [<span class="dv">0</span> <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(nums))]</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>  k <span class="op">=</span> left <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>  right <span class="op">=</span> <span class="bu">len</span>(nums)<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> left <span class="op">&lt;=</span> right:</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">pow</span>(nums[left],<span class="dv">2</span>) <span class="op">&gt;</span> <span class="bu">pow</span>(nums[right], <span class="dv">2</span>):</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>      res[k] <span class="op">=</span> <span class="bu">pow</span>(nums[right],<span class="dv">2</span>)</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>      k <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>      left <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>      res[k] <span class="op">=</span> <span class="bu">pow</span>(nums[left], <span class="dv">2</span>)</span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>      k <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>      right <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> res</span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(function1(nums))</span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(function2(nums))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[4, 9, 25, 49, 64]
 [4, 9, 25, 49, 64]</code></pre>
+</div>
+</div>
+</section>
+<section id="最小长度区间209" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="最小长度区间209"><span class="header-section-number">1.9</span> 最小长度区间（209）</h2>
+<ol type="1">
+<li><p>要求，大于等于target</p></li>
+<li><p>连续的子集</p></li>
+<li><p>最小长度的</p></li>
+<li><p>两个while循环，从最小的长度1开始，到全局，依然是暴力解法，但是超时</p></li>
+<li><p>滑动窗口（双指针）</p></li>
+</ol>
+<p>要点：一个指针的位置一定是终止位置，起始位置用动态移动的策略</p>
+<p>因为如果是起始位置，那么长度依然是个变量，需要全部长度遍历一遍才能得到解，和暴力解法类似</p>
+<p>所以固定了终止位置，子集内的和从0开始累加，如果大于target，那么结束位置的指针停，起始位置开始向后一个一个推出子集和，一直到小于target</p>
+<p>此时的长度更新最后输出的结果长度</p>
+<p>示意图 <img src="docs/docs/5.png" class="img-fluid"></p>
+<p><img src="docs/docs/6.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># input</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>nums <span class="op">=</span> [<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">3</span>]</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>nums2 <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">4</span>]</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>target2 <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># output: 2, 1</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 暴力解法</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> MinSubArrayLen(nums, target):</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  length <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> length <span class="op">&lt;=</span> <span class="bu">len</span>(nums):</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(nums)<span class="op">-</span>length<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="bu">sum</span>(nums[i:i<span class="op">+</span>length]) <span class="op">&gt;=</span> target:</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> length</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    length <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> MinSubArrayLen2(nums, target):</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 创建一个指针指向子数组的结束位置</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>  sums <span class="op">=</span> <span class="dv">0</span> <span class="co"># 表示子数组内的集合</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>  result <span class="op">=</span> <span class="bu">len</span>(nums)</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>  start <span class="op">=</span> <span class="dv">0</span>  <span class="co"># 指针1</span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> end <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(nums)):  <span class="co"># 指针2</span></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    sums <span class="op">+=</span> nums[end]  <span class="co"># 先让sums不断扩张</span></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (sums <span class="op">&gt;=</span> target):  <span class="co"># 直到sums比target大</span></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>      length <span class="op">=</span> end <span class="op">-</span> start <span class="op">+</span> <span class="dv">1</span>   <span class="co"># 计算此时的数组长度</span></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>      result <span class="op">=</span> <span class="bu">min</span>(result, length)   <span class="co"># 为什么是不断找最小值，而不是赋值，因为可能当前length会大于已经更新后的result</span></span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>      sums <span class="op">-=</span> nums[start]  <span class="co"># 起始位置的移动，导致和减下去</span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>      start <span class="op">+=</span> <span class="dv">1</span>  <span class="co"># 起始位置的移动导致了sums的递减</span></span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 对没有该特征的处理</span></span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> sums <span class="op">==</span> <span class="bu">sum</span>(nums):</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> result</span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(MinSubArrayLen2(nums, target))</span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(MinSubArrayLen2(nums2, target2)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+1</code></pre>
+</div>
+</div>
+</section>
+<section id="螺旋矩阵59" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="螺旋矩阵59"><span class="header-section-number">1.10</span> 螺旋矩阵（59）</h2>
+<p>转一圈时，处理所有的边，遵循左闭右开的原则 – 循环不变量原则</p>
+<p>里面还有坐标的概念</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#input</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># output: [[1,2,3], [8,9,4], [7,6,5]]</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> SpatialMatrix(target):</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  startx <span class="op">=</span> starty <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  count <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  offset <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  nums <span class="op">=</span> [[<span class="dv">0</span> <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(target)] <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(target)]   <span class="co"># 初始化一个二维的数组用来赋值</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, target <span class="op">-</span> offset):</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    nums[<span class="dv">0</span>][i] <span class="op">=</span> count</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>    count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>    starty <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, target <span class="op">-</span> offset):</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    nums[j][starty] <span class="op">=</span> count</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(target<span class="op">-</span>offset, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    nums[<span class="dv">2</span>][i] <span class="op">=</span> count</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(target <span class="op">-</span> offset, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>    nums[j][<span class="dv">0</span>] <span class="op">=</span> count</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>    count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> target <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>    nums[<span class="dv">1</span>][<span class="dv">1</span>] <span class="op">=</span> count</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> nums</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(SpatialMatrix(target))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1, 2, 3], [8, 9, 4], [7, 6, 5]]</code></pre>
 </div>
 </div>
 
